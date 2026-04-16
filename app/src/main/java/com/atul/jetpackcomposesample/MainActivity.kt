@@ -28,13 +28,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun SayCheezy(name: String ) {
-    Text(text = "Hello $name")
-}
 
-@Preview(showBackground = true, name = "Hello Message", showSystemUi = true, widthDp = 200, heightDp = 200)
-@Composable
-private fun PreviewFunction (){
-    SayCheezy(name = "Atul")
-}
+
+
