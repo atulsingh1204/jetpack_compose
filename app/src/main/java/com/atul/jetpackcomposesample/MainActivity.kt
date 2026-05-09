@@ -7,6 +7,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ListItemDefaults.contentColor
@@ -16,11 +21,13 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +41,9 @@ class MainActivity : ComponentActivity() {
 //            ButtonFunction()
 //            PreviewTextField()
 
-            TextInput()
+//            TextInput()
+
+            PreviewFunction()
 
         }
 
@@ -87,31 +96,63 @@ class MainActivity : ComponentActivity() {
 //}
 
 
-    @Preview(showBackground = true, widthDp = 300, heightDp =  300)
+    @Preview(showBackground = true, widthDp = 300, heightDp = 300)
     @Composable
-    private fun PreviewTextField(){
+    private fun PreviewTextField() {
         TextField(
             value = "Hello Atul",
             onValueChange = {
                 Toast.makeText(this, "Button Clicked", Toast.LENGTH_SHORT).show()
             },
-            label = {Text("Enter your name")},
-            placeholder = {Text("Name")},
+            label = { Text("Enter your name") },
+            placeholder = { Text("Name") },
         )
 
     }
 
     @Composable
-    fun TextInput(){
-        val state = remember{ mutableStateOf("") }
+    fun TextInput() {
+        val state = remember { mutableStateOf("") }
         TextField(
             value = state.value,
             onValueChange = {
                 state.value = it
 //                Log.e("check", "TextInput: " + it)
             },
-            label = {Text("Enter Message")},
+            label = { Text("Enter Message") },
         )
+    }
+
+    @Preview(showBackground = true, widthDp = 300, heightDp = 500)
+    @Composable
+    fun PreviewFunction() {
+
+        Column {
+            ListView(R.drawable.ic_person, "Atul Kumar Singh", "Software Engineer")
+            ListView(R.drawable.ic_person, "Mukesh Ambani", "Software Engineer")
+            ListView(R.drawable.ic_person, "AJay Devgan", "Mechanical Engineer")
+            ListView(R.drawable.ic_person, "Akshay Kumar", "Electrical Engineer")
+            ListView(R.drawable.ic_person, "Amitabh Bachchan", "Software Engineer")
+        }
+    }
+
+
+    @Composable
+    fun ListView(imgId: Int, name: String, occupation: String) {
+        Row(
+            Modifier.padding(16.dp),
+            Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = imgId),
+                contentDescription = "Dummy Image",
+                Modifier.size(50.dp)
+            )
+            Column() {
+                Text(name)
+                Text(occupation)
+            }
+        }
     }
 
 }
